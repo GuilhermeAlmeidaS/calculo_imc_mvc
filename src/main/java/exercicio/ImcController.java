@@ -21,13 +21,15 @@ public class ImcController  extends HttpServlet {
 		String pesoStr = request.getParameter("peso");
 
 		if( pesoStr == null || alturaStr == null || pesoStr == "" || alturaStr == ""){
-		        return;
+			pesoStr = "0";
+			alturaStr = "0";
 		}
-
-		double peso = Double.parseDouble(pesoStr);
-		double altura = Double.parseDouble(alturaStr);
-		altura = altura == 0 ? 1 : altura;
-		
+				
+		alturaStr = alturaStr == "0" ? "1" : alturaStr;
+				
+		float peso = Float.valueOf(pesoStr);
+		float altura = Float.valueOf(alturaStr);
+						
 		//Executa "regras de negócio".
 		ImcModel ImcModel = new ImcModel(altura,peso);
 		String resultado = ImcModel.resultado();
